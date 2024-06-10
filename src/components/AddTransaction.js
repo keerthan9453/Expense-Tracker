@@ -4,6 +4,8 @@ import { GlobalContext } from '../context/GlobalState';
 export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
   const { addTransaction } = useContext(GlobalContext);
 
@@ -15,6 +17,10 @@ export const AddTransaction = () => {
       text,
       amount: +amount
     }
+    setText('');
+    setAmount('');
+    setDate('');
+    setTime('');
 
     addTransaction(newTransaction);
   }
@@ -34,6 +40,14 @@ export const AddTransaction = () => {
           >
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
         </div>
+        <div className="form-control">
+        <label htmlFor="date">Date</label>
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+      </div>
+      <div className="form-control">
+        <label htmlFor="time">Time</label>
+        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+      </div>
         <button className="btn">Add transaction</button>
       </form>
     </>
