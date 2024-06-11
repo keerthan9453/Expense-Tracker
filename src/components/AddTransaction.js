@@ -4,6 +4,7 @@ import { GlobalContext } from '../context/GlobalState';
 export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState('');
   const { addTransaction } = useContext(GlobalContext);
 
   const onSubmit = e => {
@@ -13,12 +14,13 @@ export const AddTransaction = () => {
       id: Math.floor(Math.random() * 100000000),
       text,
       amount: +amount,
-      date: new Date().toLocaleDateString(),
+      date: date,
       time: new Date().toLocaleTimeString()
     }
   
 
     addTransaction(newTransaction);
+
   }
 
   return (
@@ -35,6 +37,14 @@ export const AddTransaction = () => {
             (negative - expense, positive - income)</label
           >
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
+        </div>
+        <div className="form-control">
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
         </div>
         <button className="btn">Add transaction</button>
       </form>
